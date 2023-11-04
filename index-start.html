@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Page Title</title>
+    <script src="https://unpkg.com/vue@3"></script>
+</head>
+
+<body>
+    <div id="app">
+        <p>
+            <!-- v-model is a directive that binds the input to the data property 'greeting'-->
+            <!-- not only finding the vslue of the input greeting but also listening for a change-->
+            <input type="text" v-model="greeting">
+        </p>
+        <p>
+            <!-- echo out the value associated with the data property 'greeting'-->
+            <!-- {{}} - this is the mustache syntax-->
+            {{ greeting }} ({{greeting.length}})
+        </p>
+    </div>
+
+    <script>
+        Vue.createApp({
+            data() {
+                return {
+                    greeting: 'Hello World!'
+                }
+            },
+            // this gets mounted or fires as soon as the page loads
+            mounted() {
+                // this is a reference to the Vue instance
+                // on page mount, after 3 seconds change the value in greeting to 'Changed'
+                setTimeout(() => {
+                    this.greeting = 'Changed';
+                }, 3000)
+
+            }
+        }).mount('#app');
+    </script>
+</body>
+
+</html>

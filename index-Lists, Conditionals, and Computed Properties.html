@@ -14,7 +14,7 @@
             <h2 class="font-bold mb-2">In Progress</h2>
 
             <ul>
-                <!--always add key sso vue the specific element or data you are referring to especially for a for-->
+                <!--always add key so vue knows the specific element or data you are referring to especially for a for-->
                 <li v-for="assignment in inProgressAssignments" :key="assignment.id">
                     <label>
                         {{ assignment.name }}
@@ -27,6 +27,7 @@
 
         <!--v-show just sets display to hidden when the condition is false-->
         <!--Display this section when we have assignments that have been completed and the array length is more than zero -->
+        <!-- v-if loads or is called when the action happens, v-show sets the attribute to display none -->
         <section v-show="completedAssignments.length" class="mt-8">
             <h2 class="font-bold mb-2">Completed</h2>
 

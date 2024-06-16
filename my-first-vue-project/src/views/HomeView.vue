@@ -1,40 +1,40 @@
-<!--<script setup>-->
-<!--import TheWelcome from '../components/TheWelcome.vue'-->
-<!--</script>-->
-
-<!--Mixins is the traits equivalent in php-->
-<!--<script>-->
-<!--// import flash from "@/mixins/flash";-->
-<!--import {useFlash} from '@/composables/useFlash.js'-->
-
-<!--export default {-->
-<!--  // mixins: [flash]-->
-<!--  setup() {-->
-<!--    let { flash } = useFlash();-->
-
-<!--    return { flash };-->
-<!--  }-->
-<!--};-->
-<!--</script>-->
 <script setup>
-// import flash from "@/mixins/flash";
-import {useFlash} from '@/composables/useFlash.js'
 
-let { flash } = useFlash();
+import { onMounted, ref } from 'vue'; // like the key attribute
+
+// Linked to the whole textarea
+let textarea = ref(null);
+
+  onMounted(() => {
+    // Adding an event listener to the ref that is pointing to the text area we created
+    // Listen for when user pressed a key
+      textarea.value.addEventListener("keydown", (e) => {
+        let t = textarea.value;
+        // check if tab was pressed
+        if(e.keyCode === 9) {
+          //   tab was pressed
+          //   get caret postion/selection
+          //   caret indicates where the user can enter text
+          let val = t.value,
+            start = t.selectionStart,
+            end = t.selectionEnd;
+
+          //   set textarea value to: text before caret + tab + text after caret
+          t.value = val.substring(0, start) + "\t" + val.substring(end);
+
+          //   put caret at right position again
+          t.selectionStart = t.selectionEnd = start + 1;
+
+          e.preventDefault();
+        }
+      })
+});
 </script>
-
-
 
 <template>
   <main>
-    <p>
-      <button @click="flash('Test','It Works!')">Click Me</button>
-    </p>
+    <form>
+      <textarea ref="textarea" style="width: 100%; height: 300px;">Hi there</textarea>
+    </form>
   </main>
 </template>
-<!--<template>-->
-<!--  <main>-->
-<!--&lt;!&ndash;   Common convention to precede a word with 'the' when its going to be used exactly one time throughout the entire project &ndash;&gt;-->
-<!--    <TheWelcome />-->
-<!--  </main>-->
-<!--</template>-->

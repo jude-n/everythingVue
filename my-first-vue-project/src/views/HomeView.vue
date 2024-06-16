@@ -5,36 +5,33 @@ import { onMounted, ref } from 'vue'; // like the key attribute
 // Linked to the whole textarea
 let textarea = ref(null);
 
-  onMounted(() => {
-    // Adding an event listener to the ref that is pointing to the text area we created
-    // Listen for when user pressed a key
-      textarea.value.addEventListener("keydown", (e) => {
-        let t = textarea.value;
-        // check if tab was pressed
-        if(e.keyCode === 9) {
-          //   tab was pressed
-          //   get caret postion/selection
-          //   caret indicates where the user can enter text
-          let val = t.value,
-            start = t.selectionStart,
-            end = t.selectionEnd;
+function onKeyDown(e) {
 
-          //   set textarea value to: text before caret + tab + text after caret
-          t.value = val.substring(0, start) + "\t" + val.substring(end);
+    let t = textarea.value;
+    // check if tab was pressed
+    if (e.keyCode === 9) {
+      //   tab was pressed
+      //   get caret postion/selection
+      //   caret indicates where the user can enter text
+      let val = t.value,
+        start = t.selectionStart,
+        end = t.selectionEnd;
 
-          //   put caret at right position again
-          t.selectionStart = t.selectionEnd = start + 1;
+      //   set textarea value to: text before caret + tab + text after caret
+      t.value = val.substring(0, start) + "\t" + val.substring(end);
 
-          e.preventDefault();
-        }
-      })
-});
+      //   put caret at right position again
+      t.selectionStart = t.selectionEnd = start + 1;
+
+      e.preventDefault();
+    }
+}
 </script>
 
 <template>
   <main>
     <form>
-      <textarea ref="textarea" style="width: 100%; height: 300px;">Hi there</textarea>
+      <textarea ref="textarea" @keydown="onKeyDown" style="width: 100%; height: 300px;">Hi there</textarea>
     </form>
   </main>
 </template>

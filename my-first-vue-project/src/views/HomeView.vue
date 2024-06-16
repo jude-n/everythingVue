@@ -5,11 +5,9 @@ import { onMounted, ref } from 'vue'; // like the key attribute
 // Linked to the whole textarea
 let textarea = ref(null);
 
-function onKeyDown(e) {
+function onTabPress(e) {
 
     let t = textarea.value;
-    // check if tab was pressed
-    if (e.keyCode === 9) {
       //   tab was pressed
       //   get caret postion/selection
       //   caret indicates where the user can enter text
@@ -24,14 +22,14 @@ function onKeyDown(e) {
       t.selectionStart = t.selectionEnd = start + 1;
 
       e.preventDefault();
-    }
+
 }
 </script>
 
 <template>
   <main>
     <form>
-      <textarea ref="textarea" @keydown="onKeyDown" style="width: 100%; height: 300px;">Hi there</textarea>
+      <textarea ref="textarea" @keydown.tab="onTabPress" style="width: 100%; height: 300px;">Hi there</textarea>
     </form>
   </main>
 </template>

@@ -7,7 +7,7 @@ let textarea = ref(null);
 
 function onTabPress(e) {
 
-    let t = textarea.value;
+    let t = e.target;
       //   tab was pressed
       //   get caret postion/selection
       //   caret indicates where the user can enter text
@@ -20,16 +20,13 @@ function onTabPress(e) {
 
       //   put caret at right position again
       t.selectionStart = t.selectionEnd = start + 1;
-
-      e.preventDefault();
-
 }
 </script>
 
 <template>
   <main>
     <form>
-      <textarea ref="textarea" @keydown.tab="onTabPress" style="width: 100%; height: 300px;">Hi there</textarea>
+      <textarea @keydown.tab.prevent="onTabPress" style="width: 100%; height: 300px;">Hi there</textarea>
     </form>
   </main>
 </template>

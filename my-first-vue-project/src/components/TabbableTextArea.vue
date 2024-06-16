@@ -2,6 +2,8 @@
 defineProps({
   modelValue: String
 })
+
+let emit = defineEmits(['update:modelValue']);
 function onTabPress(e) {
 
   let t = e.target;
@@ -18,8 +20,17 @@ function onTabPress(e) {
   //   put caret at right position again
   t.selectionStart = t.selectionEnd = start + 1;
 }
+
+function update(e) {
+// this.$emit('update:modelValue', e.target.value) // - first way of doing it
+  emit('update:modelValue', e.target.value);
+
+}
 </script>
 
 <template>
-  <textarea @keydown.tab.prevent="onTabPress" v-text="modelValue"/>
+  <textarea
+    @keydown.tab.prevent="onTabPress"
+    @keyup="update"
+    v-text="modelValue"/>
 </template>

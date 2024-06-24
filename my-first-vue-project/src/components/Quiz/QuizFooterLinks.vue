@@ -1,12 +1,16 @@
 <template>
-  <main>
+  <div>
+    <h5>{{ quiz.name }}</h5>
+
     <ul>
-      <li>Get a Job</li>
-      <li>Contact Us</li>
+      <li><a href="#">Get a Job</a></li>
+      <li><a href="#">Contact Us</a></li>
     </ul>
-  </main>
+  </div>
 </template>
 
 <script setup>
-
+defineProps({
+  quiz: Object
+});
 </script>

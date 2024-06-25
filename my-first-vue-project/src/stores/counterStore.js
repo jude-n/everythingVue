@@ -1,5 +1,13 @@
 import { reactive } from "vue";
 
 export let counter = reactive({
-  count:0
+  // aka state
+  count:0,
+
+//   Method exclusively for incrementing count
+//   aka actions
+  increment() {
+    this.count++;
+  }
+
 });

@@ -1,6 +1,6 @@
 <script setup>
 import Quiz from '@/components/Quiz/Quiz.vue';
-import state from '@/stores/quizStore'
+import { state } from '@/stores/quizStore'
 </script>
 
 <template>
